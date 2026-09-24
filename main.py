@@ -1,11 +1,23 @@
-import numpy as np
 from bond import Bond
+from dcf import CashFlowPricer
 
-# Criamos um título do Tesouro que custa 1000, paga 5% ao ano, com vencimento em 10 anos.
+# ==========================================
+# TESTE ESTÁTICO 1: TÍTULO DE RENDA FIXA
+# ==========================================
+print(Bond.descricao)
 treasury_bond = Bond(face_value=1000, coupon_rate=0.05, maturity_years=10)
+preco_bond = treasury_bond.calculate_price(discount_rate=0.06)
+print(f"[>] Preço do Bond: US$ {preco_bond:.2f}\n")
 
-# O cenário muda: a Selic/Fed Funds sobe e o mercado agora exige 6% de rendimento (discount_rate).
-preco_justo = treasury_bond.calculate_price(discount_rate=0.06)
+# ==========================================
+# TESTE ESTÁTICO 2: DCF GENÉRICO
+# ==========================================
+print(CashFlowPricer.descricao)
+# Instancia a calculadora com uma taxa de desconto de 10%
+pricer = CashFlowPricer(discount_rate=0.10)
 
-print(f"O preço justo do Bond na tela do terminal é: US$ {preco_justo:.2f}")
-# Resultado esperado: O preço cai para baixo de 1000, refletindo a gangorra da renda fixa.
+# Simula uma empresa que lucra 100, 150 e 200 nos próximos 3 anos
+fluxos_projetados = [100.0, 150.0, 200.0]
+
+valor_presente = pricer.calculate_npv(fluxos_projetados)
+print(f"[>] Valor Presente Líquido (DCF): US$ {valor_presente:.2f}")
