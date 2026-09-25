@@ -1,7 +1,7 @@
-from bond import Bond
-from dcf import CashFlowPricer
-from fx import FXForward
-from swap import InterestRateSwap
+from models.deterministic.bond import Bond
+from models.deterministic.dcf import CashFlowPricer
+from models.deterministic.fx import FXForward
+from models.deterministic.swap import InterestRateSwap
 
 def validar_teste(nome_teste, valor_calculado, valor_esperado, tolerancia=0.01):
     """Função auxiliar para comparar o resultado do código com o gabarito matemático."""
