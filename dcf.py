@@ -3,9 +3,18 @@ import numpy as np
 class CashFlowPricer:
     descricao = """
     === DESCONTO DE FLUXOS DE CAIXA (DCF) ===
-    O meu aprendizado: Traz uma série de fluxos de caixa futuros e variáveis 
-    para o valor presente, descontando o custo de oportunidade (taxa de desconto).
-    Calcula o Net Present Value (Valor Presente Líquido) para tal
+    O meu entendimento: Traz uma série de fluxos de caixa futuros 
+    para o valor presente, descontando o custo de oportunidade.
+    
+    Matemática:
+            T
+    NPV =   Σ  [ CF_t / (1 + r)^t ]
+           t=1
+
+    Onde:
+    Σ    = Somatório do período 1 até T
+    CF_t = Fluxo de caixa no ano 't'
+    r    = Taxa de desconto (custo de oportunidade)
     """
 
     # O Construtor: define o estado inicial do objeto financeiro

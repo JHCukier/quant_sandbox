@@ -4,9 +4,20 @@ class Bond:
 # Atributo de classe: pertence ao conceito, não precisa ser instanciado
     descricao = """
     === TÍTULOS DE RENDA FIXA (BONDS) ===
-    O meu aprendizado: O Bond é um título de dívida que paga cupons periódicos.
-    A regra de ouro é a correlação inversa : se as taxas de juros 
-    exigidas pelo mercado sobem, o valor presente do meu título cai, para compensar o aumento.
+    O meu aprendizado: O Bond é um título de dívida com cupons periódicos.
+    Se as taxas de juros sobem, o valor presente do título cai, pois ele pagará
+    juros pré-fixados menores q o mercado.
+
+    Matemática:
+             T
+    Preço =  Σ  [ C / (1 + r)^t ]  +  [ F / (1 + r)^T ]
+            t=1
+
+    Onde:
+    C = Pagamento do Cupom (Valor de Face * Taxa do Cupom)
+    F = Valor de Face (Principal devolvido no vencimento)
+    r = Taxa de desconto exigida pelo mercado
+    T = Prazo até o vencimento (Maturity)
     """
 
     # O Construtor: define o estado inicial do objeto financeiro
