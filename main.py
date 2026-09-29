@@ -4,6 +4,7 @@ from models.deterministic.fx import FXForward
 from models.deterministic.swap import InterestRateSwap
 from models.stochastic.gbm import GeometricBrownianMotion
 from models.stochastic.monte_carlo import MonteCarloEngine
+from models.analytical.black_scholes import BlackScholesPricer
 
 def menu_deterministico():
     opcoes = {
@@ -66,8 +67,22 @@ def menu_principal():
             engine = MonteCarloEngine(num_paths=10000, dt=1/252)
         
             preco = engine.price_european_call(model=gbm, S0=S0, K=K, T=T, r=r)
-        
-            print(f"\nO preço justo calculado por Monte Carlo (10.000 cenários) é: R$ {preco:.2f}")
+
+            # Cálculo Analítico (Gabarito)
+            bs = BlackScholesPricer()
+            preco_mc = engine.price_european_call(model=gbm, S0=S0, K=K, T=T, r=r)
+            preco_bs = bs.price_european_call(S0=S0, K=K, T=T, r=r, sigma=sigma)
+            
+            # Cálculo do Erro de Convergência
+            erro = abs(preco_mc - preco_bs)
+            
+            print("\n" + "-"*40)
+            print(" RESULTADOS DA PRECIFICAÇÃO")
+            print("-"*40)
+            print(f"Monte Carlo (10k cenários) : R$ {preco_mc:.4f}")
+            print(f"Black-Scholes (Gabarito)   : R$ {preco_bs:.4f}")
+            print(f"Erro Numérico              : R$ {erro:.4f}")
+            print("-"*40)
             
         elif escolha == "0":
             print("\nSaindo do Quant Sandbox...")
