@@ -50,12 +50,12 @@ O projeto possui um orquestrador via terminal interativo que permite instanciar 
 ```bash
 git clone https://github.com/JHCukier/quant_sandbox.git
 ```
-```bash
 2. Navegue até o diretório:
+```bash
 cd quant_sandbox
 ```
-```bash
 3. Execute o motor principal:
+```bash
 python main.py
 ```
 
