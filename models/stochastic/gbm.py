@@ -5,6 +5,15 @@ class GeometricBrownianMotion:
         """
         Inicializa o modelo estocástico do Movimento Browniano Geométrico.
         
+        Equação Diferencial Estocástica (Tempo Contínuo):
+        dS_t = \mu S_t dt + \sigma S_t dW_t
+
+        Solução Analítica Exata (Tempo Discreto - Vetorizada):
+        S_{t+\Delta t} = S_t * exp((mu - (sigma^2)/2)*\Delta t + sigma * sqrt(\Delta t) * Z)
+
+        Fundamentos:
+        - (sigma^2)/2: Volatility Drag (arrasto de volatilidade deduzido pelo Lema de Itô).
+        - Z ~ N(0,1): Matriz de ruído estocástico representando o Processo de Wiener. 
         :param mu: Taxa esperada de retorno (drift). Em precificação neutra ao risco, é a taxa livre de risco (r).
         :param sigma: Volatilidade do ativo (desvio padrão anualizado).
         """
