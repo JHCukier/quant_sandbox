@@ -35,6 +35,9 @@ Para além da precificação estocástica, o **Quant Sandbox** inclui uma camada
 * **Integração de Dados e Automação:** Exportação via `Pandas` do array de resultados estocásticos para `.csv`, permitindo o desenvolvimento de *dashboards* em ferramentas de BI e Excel.
 ### 📈 Dashboard de Distribuição (Excel)
 > *Distribuição de frequência do PnL baseada em 10.000 caminhos estocásticos e o limite do Value at Risk (99%).*
+> 
+> **Parâmetros desta simulação:** Ativo (S0) = 100 | Strike (K) = 100 | Volatilidade = 20% | Taxa Livre de Risco = 10% | Tempo = 1 ano | Posição: Compra de 1.000 Calls. 
+> *Nota: O custo inicial da operação (Prêmio x Qtd) foi de R$ 13.270,00, valor que se comprova matematicamente no histograma como a barreira de perda máxima (Risco Limitado).*
 
 ![Distribuição de PnL 10k Cenários](assets/dashboard_pnl.png)
 
