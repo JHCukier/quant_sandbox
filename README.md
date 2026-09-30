@@ -28,6 +28,15 @@ Construção do ambiente base, modelagem do tempo contínuo e validação de con
 - **Modelos Analíticos (Gabarito Exato):** 
   - Precificador exato via fórmula fechada de **Black-Scholes-Merton**.
 - **Validação:** Confronto em tempo real entre a força bruta (Monte Carlo) e a elegância analítica (Black-Scholes) para medição de erro numérico e convergência.
+## 📊 Análise de Risco de Carteira (VaR e PnL)
+Para além da precificação estocástica, o **Quant Sandbox** inclui uma camada de gestão de risco para simular o impacto financeiro de posições direcionais.
+* **Distribuição de PnL (Profit and Loss):** Cálculo vetorizado do *payoff* e lucro/prejuízo de uma posição (ex: *Long Call*) através dos milhares de cenários gerados pelo motor estocástico.
+* **Value at Risk (VaR):** Extração automatizada do VaR Histórico Simulado (nível de confiança de 99%), isolando a perda máxima esperada.
+* **Integração de Dados e Automação:** Exportação via `Pandas` do array de resultados estocásticos para `.csv`, permitindo o desenvolvimento de *dashboards* em ferramentas de BI e Excel.
+### 📈 Dashboard de Distribuição (Excel)
+> *Distribuição de frequência do PnL baseada em 10.000 caminhos estocásticos e o limite do Value at Risk (99%).*
+
+![Distribuição de PnL 10k Cenários](assets/dashboard_pnl.png)
 
 ### ⏳ Fase 2: Gregos, Sensibilidade e Hedge Dinâmico (Próxima)
 - Cálculo das derivadas parciais do modelo (Delta, Gamma, Vega, Theta, Rho) usando o método de Diferenças Finitas.
