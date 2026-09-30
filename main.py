@@ -5,6 +5,7 @@ from models.deterministic.swap import InterestRateSwap
 from models.stochastic.gbm import GeometricBrownianMotion
 from models.stochastic.monte_carlo import MonteCarloEngine
 from models.analytical.black_scholes import BlackScholesPricer
+from models.risk.risk_analysis import PortfolioRisk
 
 def menu_deterministico():
     opcoes = {
@@ -83,6 +84,33 @@ def menu_principal():
             print(f"Black-Scholes (Gabarito)   : R$ {preco_bs:.4f}")
             print(f"Erro Numérico              : R$ {erro:.4f}")
             print("-"*40)
+
+        # --- NOVO MÓDULO DE RISCO ---
+            print("\n" + "="*40)
+            print("MÓDULO DE GESTÃO DE RISCO (VaR e PnL)")
+            print("="*40)
+        
+            simular_risco = input("Deseja simular o risco (PnL/VaR) de uma posição com os cenários gerados? (S/N): ").strip().upper()
+        
+            if simular_risco == 'S':
+              quantidade = int(input("Introduza a quantidade de opções compradas (ex: 1000): "))
+              premio = float(input("Introduza o prémio pago por opção (ex: 2.50): "))
+            
+            # 1. Gera a matriz completa chamando o método do GBM
+            # O dt é 1/252 (diário) e num_paths é 10000, conforme instanciado no motor
+              matriz_caminhos = gbm.simulate_paths(S0=S0, T=T, dt=1/252, num_paths=10000)
+            
+            # 2. Isola os preços finais (última linha da matriz)
+              precos_finais = matriz_caminhos[-1]
+            
+            # 3. Alimenta a sua classe de risco
+              carteira = PortfolioRisk(precos_finais, K, quantidade, premio)
+            
+              var_99 = carteira.calcular_risco()
+              print(f"\n[RISCO] Value at Risk (VaR 99%): Perda máxima esperada de R$ {abs(var_99):.2f}")
+            
+              carteira.exportar_csv()
+              print("[DADOS] Ficheiro 'simulacao_pnl.csv' exportado com sucesso!")
             
         elif escolha == "0":
             print("\nSaindo do Quant Sandbox...")
